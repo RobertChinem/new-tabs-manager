@@ -5,14 +5,14 @@ module.exports = {
    mode: "production",
    entry: {
       background: path.resolve(__dirname, "..", "src", "main.ts"),
-      options: path.resolve(__dirname, "..", "src", "pages", "options-page", "main.ts"),
+      options: path.resolve(__dirname, "..", "src", "pages", "options-page", "main.tsx"),
    },
    output: {
       path: path.join(__dirname, "../dist"),
       filename: "[name].js",
    },
    resolve: {
-      extensions: [".ts", ".js"],
+      extensions: [".ts", ".js", ".tsx"],
    },
    module: {
       rules: [
@@ -25,7 +25,7 @@ module.exports = {
    },
    plugins: [
       new CopyPlugin({
-         patterns: [{from: ".", to: ".", context: "public"}],
+         patterns: [{ from: ".", to: ".", context: "public" }],
       }),
    ],
 };

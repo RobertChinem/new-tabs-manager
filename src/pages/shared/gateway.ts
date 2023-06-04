@@ -1,5 +1,5 @@
 import Actions from "../../actions"
-import DomainRule from "./models/domain-rule"
+import DomainRule from "../../entities/domain-rule"
 
 export default class Gateway {
     async saveDomainRules(domainRules: DomainRule[]) {
@@ -11,10 +11,10 @@ export default class Gateway {
         return data as unknown as DomainRule[]
     }
 
-    private sendToBackgroundService(action: string, data?: any){
+    private sendToBackgroundService(action: string, data?: any) {
         return new Promise((resolve) => {
             chrome.runtime.sendMessage({ action, data }, (response) => {
-               resolve(response)
+                resolve(response)
             })
         })
     }
