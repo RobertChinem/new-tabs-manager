@@ -1,7 +1,7 @@
 import SortByURLService from "../../services/sort-by-url-service"
-import Controller from "./commands-controller"
+import CommandsController from "./commands-controller"
 
-export default class SortByUrlServiceController extends Controller {
+export default class SortByUrlServiceController extends CommandsController {
     private service = new SortByURLService()
 
     async execute() {
