@@ -1,11 +1,23 @@
+import DomainRule from '../entities/domain-rule'
+import Repository from '../repositories/repository'
 import {getDomainFromURL} from '../utils/get-domain-from-url'
 
 export default class ExtractTabsService {
+  private repository = new Repository()
+  private domainRules: DomainRule[] = []
+
   async execute({domains}: ExtractTabsRequest) {
+    this.domainRules = await this.repository.getDomainRules()
     const tabs = await chrome.tabs.query({currentWindow: true})
     const selectedTabs = tabs.filter((tab) => {
       const domain = getDomainFromURL(tab.url || '')
-      return domains.includes(domain)
+      const domainRule = this.domainRules.find(
+        (domainRule) => domainRule.domain === domain
+      )
+      return (
+        (domainRule && domains.includes(domainRule.title)) ||
+        domains.includes(domain)
+      )
     })
     this.createWindow(selectedTabs)
   }

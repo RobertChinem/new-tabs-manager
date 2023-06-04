@@ -1,10 +1,10 @@
-import DomainRule from "../entities/domain-rule"
-import Repository from "../repositories/repository"
+import DomainRule from '../entities/domain-rule'
+import Repository from '../repositories/repository'
 
 export default class UpdateDomainRulesService {
-    private respoitory = new Repository()
+  private respoitory = new Repository()
 
-    async execute(domainRules: DomainRule[]){
-        await this.respoitory.updateDomainRules(domainRules)
-    }
+  async execute(domainRules: DomainRule[]) {
+    await this.respoitory.updateDomainRules(domainRules)
+  }
 }
