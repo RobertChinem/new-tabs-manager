@@ -5,15 +5,8 @@ import Command from '../../../entities/command'
 
 const App = () => {
   const [search, setSearch] = useState('')
+  const [params, setParams] = useState('')
   const [commands, setCommands] = useState<Command[]>([])
-
-  useEffect(() => {
-    const gateway = new Gateway()
-    gateway.getCommands().then((commands) => {
-      setCommands(commands)
-    })
-  }, [])
-
   const filteredCommands = useMemo(() => {
     if (!search || search.length === 0) return commands
     const words = search.split(' ').filter((word) => word.length > 0)
@@ -23,12 +16,21 @@ const App = () => {
       })
     })
   }, [commands, search])
+  const selectedCommand = filteredCommands[0]
+
+  useEffect(() => {
+    const gateway = new Gateway()
+    gateway.getCommands().then((commands) => {
+      setCommands(commands)
+    })
+  }, [])
 
   const handleExecuteCommand = () => {
     const command = filteredCommands[0]
     const gateway = new Gateway()
-    gateway.executeCommand(command.action)
+    gateway.executeCommand(command.action, params)
     setSearch('')
+    setParams('')
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,7 +40,7 @@ const App = () => {
   }
 
   return (
-    <div className='w-96 p-4 pb-16'>
+    <div className='w-96 p-4'>
       <Input
         placeholder='Enter a command'
         autoFocus={true}
@@ -46,11 +48,28 @@ const App = () => {
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <div>
-        {filteredCommands.map((command) => (
-          <div>{JSON.stringify(command, null, 2)}</div>
+      <div className='my-2'>
+        {filteredCommands.map((command, index) => (
+          <div className={`${index === 0 ? 'bg-blue-700 rounded-md' : ''} p-4`}>
+            <h3
+              className={`${
+                index === 0 ? 'text-white rounded-md' : ''
+              } text-lg`}
+            >
+              {command.description}
+            </h3>
+          </div>
         ))}
       </div>
+
+      {selectedCommand && !!selectedCommand.hint && (
+        <Input
+          placeholder={selectedCommand.hint}
+          value={params}
+          onChange={(e) => setParams(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+      )}
     </div>
   )
 }

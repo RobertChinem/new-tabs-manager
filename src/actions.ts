@@ -1,10 +1,11 @@
 const Actions = {
-    UPDATE_DOMAIN_RULES: 'update_domain_rules',
-    GET_DOMAIN_RULES: 'get_domain_rules',
-    GROUP_TABS_BY_DOMAIN: 'group_tabs_by_domain',
-    UNGROUP_TABS: 'ungroup_tabs',
-    SORT_TABS_BY_DOMAIN: 'sort_tabs_by_domain',
-    GET_COMMANDS: 'get_commands',
+  UPDATE_DOMAIN_RULES: 'update_domain_rules',
+  GET_DOMAIN_RULES: 'get_domain_rules',
+  GROUP_TABS_BY_DOMAIN: 'group_tabs_by_domain',
+  UNGROUP_TABS: 'ungroup_tabs',
+  SORT_TABS_BY_DOMAIN: 'sort_tabs_by_domain',
+  GET_COMMANDS: 'get_commands',
+  EXTRACT_TABS: 'extract_tabs',
 }
 
 export default Actions

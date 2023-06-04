@@ -7,6 +7,7 @@ export default class GetCommandsService {
       this.getCommandForGroupTabsByDomain(),
       this.getCommandForUngroupTabs(),
       this.getCommandForSortTabsByDomain(),
+      this.getCommandForExtractTabs(),
     ]
     return commands
   }
@@ -29,6 +30,14 @@ export default class GetCommandsService {
     return {
       action: Actions.SORT_TABS_BY_DOMAIN,
       description: 'Sort tabs by domain',
+    }
+  }
+
+  private getCommandForExtractTabs(): Command {
+    return {
+      action: Actions.EXTRACT_TABS,
+      description: 'Extract tabs',
+      hint: 'd1,d2,d3...',
     }
   }
 }

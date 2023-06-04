@@ -20,8 +20,8 @@ export default class Gateway {
     return data as unknown as Command[]
   }
 
-  async executeCommand(command: string) {
-    await this.sendToBackgroundService(command)
+  async executeCommand(command: string, params: string) {
+    await this.sendToBackgroundService(command, params)
   }
 
   private sendToBackgroundService(action: string, data?: any) {
