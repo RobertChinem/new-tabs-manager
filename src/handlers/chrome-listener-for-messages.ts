@@ -16,16 +16,8 @@ import UpdateTagsController from '../controllers/messages-controller/update-tags
 
 export default class ChromeListenerForMessages {
   private static controllers: Record<string, MessagesController> = {
-    [Actions.UPDATE_DOMAIN_RULES]: new UpdateDomainRulesController(),
-    [Actions.GET_DOMAIN_RULES]: new GetDomainRulesController(),
-    [Actions.GROUP_TABS_BY_DOMAIN]: new GroupTabsByDomainController(),
-    [Actions.SORT_TABS_BY_DOMAIN]: new SortByUrlServiceController(),
-    [Actions.UNGROUP_TABS]: new UngroupTabsController(),
-    [Actions.GET_COMMANDS]: new GetCommandsController(),
-    [Actions.EXTRACT_TABS]: new ExtractTabsController(),
-    [Actions.UPDATE_TAGS]: new UpdateTagsController(),
-    [Actions.GET_TAGS]: new GetTagsController(),
-    [Actions.EXTRACT_TABS_BY_TAG]: new ExtractTabsByTagController(),
+    ...ChromeListenerForMessages.getControllersForData(),
+    ...ChromeListenerForMessages.getControllersForCommands(),
   }
 
   init() {
@@ -36,5 +28,28 @@ export default class ChromeListenerForMessages {
         return true
       }
     )
+  }
+
+  private static getControllersForCommands(): Record<
+    string,
+    MessagesController
+  > {
+    return {
+      [Actions.GROUP_TABS_BY_DOMAIN]: new GroupTabsByDomainController(),
+      [Actions.SORT_TABS_BY_DOMAIN]: new SortByUrlServiceController(),
+      [Actions.UNGROUP_TABS]: new UngroupTabsController(),
+      [Actions.EXTRACT_TABS]: new ExtractTabsController(),
+      [Actions.EXTRACT_TABS_BY_TAG]: new ExtractTabsByTagController(),
+    }
+  }
+
+  private static getControllersForData(): Record<string, MessagesController> {
+    return {
+      [Actions.UPDATE_DOMAIN_RULES]: new UpdateDomainRulesController(),
+      [Actions.GET_DOMAIN_RULES]: new GetDomainRulesController(),
+      [Actions.GET_COMMANDS]: new GetCommandsController(),
+      [Actions.UPDATE_TAGS]: new UpdateTagsController(),
+      [Actions.GET_TAGS]: new GetTagsController(),
+    }
   }
 }
