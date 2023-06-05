@@ -21,7 +21,13 @@ const App = () => {
   useEffect(() => {
     const gateway = new Gateway()
     gateway.getCommands().then((commands) => {
-      setCommands(commands)
+      setCommands(
+        commands.sort((a, b) => {
+          if (a.description < b.description) return -1
+          if (a.description > b.description) return 1
+          return 0
+        })
+      )
     })
   }, [])
 
