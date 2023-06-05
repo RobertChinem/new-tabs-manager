@@ -8,9 +8,10 @@ import {FiPlus, FiX} from 'react-icons/fi'
 interface TagVisualizerProps {
   tag: Tag
   onChange: (tag: Tag) => void
+  onDelete: () => void
 }
 
-const TagVisualizer = ({tag, onChange}: TagVisualizerProps) => {
+const TagVisualizer = ({tag, onChange, onDelete}: TagVisualizerProps) => {
   const handleAddURL = () => {
     onChange({...tag, urls: [...tag.urls, '']})
   }
@@ -21,15 +22,24 @@ const TagVisualizer = ({tag, onChange}: TagVisualizerProps) => {
 
   return (
     <Collapsable title={tag.name}>
-      <div className='mb-2'>
-        <label className='block mb-2 text-sm font-medium text-gray-900 '>
-          name
-        </label>
-        <Input
-          onChange={(e) => onChange({...tag, name: e.target.value})}
-          value={tag.name}
-          placeholder='Tag name'
-        />
+      <div className='mb-2 grid grid-cols-8 gap-4 py-2'>
+        <div className='col-span-7'>
+          <label className='block mb-2 text-sm font-medium text-gray-900'>
+            name
+          </label>
+          <Input
+            onChange={(e) => onChange({...tag, name: e.target.value})}
+            value={tag.name}
+            placeholder='Tag name'
+          />
+        </div>
+        <Button
+          className='col-span-1'
+          styleType='secondary'
+          onClick={onDelete}
+        >
+          Delete tag
+        </Button>
       </div>
       <div className='flex justify-between items-center'>
         <h3 className='inline text-base'>URLs</h3>

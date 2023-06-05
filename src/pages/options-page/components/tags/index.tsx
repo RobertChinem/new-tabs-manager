@@ -23,6 +23,12 @@ const Tags = () => {
     gateway.saveTags(tags)
   }
 
+  const handleDeleteTag = (index: number) => {
+    const newTags = [...tags]
+    newTags.splice(index, 1)
+    setTags(newTags)
+  }
+
   return (
     <div className='border rounded-md shadow-md p-4'>
       <h2 className='text-2xl mb-2'>Tags</h2>
@@ -36,6 +42,7 @@ const Tags = () => {
               newTags[index] = newTag
               setTags(newTags)
             }}
+            onDelete={() => handleDeleteTag(index)}
           />
         ))}
       </div>
