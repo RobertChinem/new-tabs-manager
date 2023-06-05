@@ -15,7 +15,7 @@ import UpdateDomainRulesController from '../controllers/messages-controller/upda
 import UpdateTagsController from '../controllers/messages-controller/update-tags-controller'
 
 export default class ChromeListenerForMessages {
-  private static services: Record<string, MessagesController> = {
+  private static controllers: Record<string, MessagesController> = {
     [Actions.UPDATE_DOMAIN_RULES]: new UpdateDomainRulesController(),
     [Actions.GET_DOMAIN_RULES]: new GetDomainRulesController(),
     [Actions.GROUP_TABS_BY_DOMAIN]: new GroupTabsByDomainController(),
@@ -31,8 +31,8 @@ export default class ChromeListenerForMessages {
   init() {
     chrome.runtime.onMessage.addListener(
       (request: Context['request'], sender, sendResponse) => {
-        const service = ChromeListenerForMessages.services[request.action]
-        if (service) service.execute({request, sender, sendResponse})
+        const controller = ChromeListenerForMessages.controllers[request.action]
+        if (controller) controller.execute({request, sender, sendResponse})
         return true
       }
     )
