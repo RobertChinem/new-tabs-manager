@@ -8,7 +8,7 @@ const Input = ({className, ...props}: InputProps) => {
 
   return (
     <input
-      className={`${className} ${baseStyle}`}
+      className={`${baseStyle} ${className}`}
       {...props}
     />
   )

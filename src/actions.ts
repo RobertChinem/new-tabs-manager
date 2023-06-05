@@ -6,6 +6,8 @@ const Actions = {
   SORT_TABS_BY_DOMAIN: 'sort_tabs_by_domain',
   GET_COMMANDS: 'get_commands',
   EXTRACT_TABS: 'extract_tabs',
+  UPDATE_TAGS: 'update_tags',
+  GET_TAGS: 'get_tags',
 }
 
 export default Actions

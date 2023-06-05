@@ -1,10 +1,20 @@
 import Actions from '../../actions'
 import Command from '../../entities/command'
 import DomainRule from '../../entities/domain-rule'
+import Tag from '../../entities/tag'
 
 export default class Gateway {
   async saveDomainRules(domainRules: DomainRule[]) {
     await this.sendToBackgroundService(Actions.UPDATE_DOMAIN_RULES, domainRules)
+  }
+
+  async saveTags(tags: Tag[]) {
+    await this.sendToBackgroundService(Actions.UPDATE_TAGS, tags)
+  }
+
+  async getTags(): Promise<Tag[]> {
+    const data = await this.sendToBackgroundService(Actions.GET_TAGS, null)
+    return data as unknown as Tag[]
   }
 
   async getDomainRules(): Promise<DomainRule[]> {

@@ -2,6 +2,7 @@ import Actions from '../actions'
 import ExtractTabsController from '../controllers/messages-controller/extract-tabs-controller'
 import GetCommandsController from '../controllers/messages-controller/get-commands-controller'
 import GetDomainRulesController from '../controllers/messages-controller/get-domain-rules-controller'
+import GetTagsController from '../controllers/messages-controller/get-tags-controller'
 import GroupTabsByDomainController from '../controllers/messages-controller/group-tabs-by-domain-controller'
 import {
   Context,
@@ -10,6 +11,7 @@ import {
 import SortByUrlServiceController from '../controllers/messages-controller/sort-by-url-service-controller'
 import UngroupTabsController from '../controllers/messages-controller/ungroup-tabs-controller'
 import UpdateDomainRulesController from '../controllers/messages-controller/update-domain-rules-controller'
+import UpdateTagsController from '../controllers/messages-controller/update-tags-controller'
 
 export default class ChromeListenerForMessages {
   private static services: Record<string, MessagesController> = {
@@ -20,6 +22,8 @@ export default class ChromeListenerForMessages {
     [Actions.UNGROUP_TABS]: new UngroupTabsController(),
     [Actions.GET_COMMANDS]: new GetCommandsController(),
     [Actions.EXTRACT_TABS]: new ExtractTabsController(),
+    [Actions.UPDATE_TAGS]: new UpdateTagsController(),
+    [Actions.GET_TAGS]: new GetTagsController(),
   }
 
   init() {
