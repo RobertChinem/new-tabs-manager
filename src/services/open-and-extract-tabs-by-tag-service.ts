@@ -14,16 +14,13 @@ export default class OpenAndExtractTabsByTagService {
   }
 
   private createWindow(tabsToExtract: chrome.tabs.Tab[], tabsToOpen: string[]) {
-    const [first, ...rest] = tabsToExtract
-
     chrome.windows.create(
       {
-        tabId: first.id,
         focused: true,
         url: tabsToOpen,
       },
       (window) => {
-        rest.forEach((tab, index) =>
+        tabsToExtract.forEach((tab, index) =>
           this.moveTab(tab.id!, window!.id!, index + 1)
         )
       }
