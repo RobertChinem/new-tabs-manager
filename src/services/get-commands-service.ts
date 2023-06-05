@@ -1,16 +1,19 @@
 import Actions from '../actions'
 import Command from '../entities/command'
+import Repository from '../repositories/repository'
 
 export default class GetCommandsService {
+  private repository = new Repository()
+
   async execute(): Promise<Command[]> {
     const commands: Command[] = [
       this.getCommandForGroupTabsByDomain(),
       this.getCommandForUngroupTabs(),
       this.getCommandForSortTabsByDomain(),
-      this.getCommandForExtractTabs(),
-      this.getCommandForExtractTabsByTag(),
-      this.getCommandForOpenAndExtractTabsByTag(),
-      this.getCommandForAddTagToCurrentTab(),
+      await this.getCommandForExtractTabs(),
+      await this.getCommandForExtractTabsByTag(),
+      await this.getCommandForOpenAndExtractTabsByTag(),
+      await this.getCommandForAddTagToCurrentTab(),
       this.getCommandForMergeAllTabs(),
     ]
     return commands
@@ -37,35 +40,46 @@ export default class GetCommandsService {
     }
   }
 
-  private getCommandForExtractTabs(): Command {
+  private async getCommandForExtractTabs(): Promise<Command> {
+    const domainRules = await this.repository.getDomainRules()
     return {
       action: Actions.EXTRACT_TABS,
       description: 'Extract tabs',
       hint: 'd1,d2,d3...',
+      datalist: [
+        ...domainRules.map((domainRule) => domainRule.domain),
+        ...domainRules.map((domainRule) => domainRule.title),
+      ],
     }
   }
 
-  private getCommandForExtractTabsByTag(): Command {
+  private async getCommandForExtractTabsByTag(): Promise<Command> {
+    const tags = await this.repository.getTags()
     return {
       action: Actions.EXTRACT_TABS_BY_TAG,
       description: 'Extract tabs by tag',
       hint: 'tag',
+      datalist: tags.map((tag) => tag.name),
     }
   }
 
-  private getCommandForOpenAndExtractTabsByTag(): Command {
+  private async getCommandForOpenAndExtractTabsByTag(): Promise<Command> {
+    const tags = await this.repository.getTags()
     return {
       action: Actions.OPEN_AND_EXTRACT_TABS_BY_TAG,
       description: 'Open and extract tabs by tag',
       hint: 'tag',
+      datalist: tags.map((tag) => tag.name),
     }
   }
 
-  private getCommandForAddTagToCurrentTab(): Command {
+  private async getCommandForAddTagToCurrentTab(): Promise<Command> {
+    const tags = await this.repository.getTags()
     return {
       action: Actions.ADD_TAG_TO_CURRENT_TAB,
       description: 'Add tag to current tab',
       hint: 'tag',
+      datalist: tags.map((tag) => tag.name),
     }
   }
 

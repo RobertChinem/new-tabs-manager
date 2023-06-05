@@ -74,7 +74,20 @@ const App = () => {
           value={params}
           onChange={(e) => setParams(e.target.value)}
           onKeyDown={handleKeyDown}
+          list='datalist'
+          className='mb-16'
         />
+      )}
+
+      {selectedCommand && !!selectedCommand.datalist && (
+        <datalist id='datalist'>
+          {selectedCommand.datalist.map((item, index) => (
+            <option
+              key={index}
+              value={item}
+            />
+          ))}
+        </datalist>
       )}
     </div>
   )
