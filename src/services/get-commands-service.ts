@@ -8,6 +8,7 @@ export default class GetCommandsService {
       this.getCommandForUngroupTabs(),
       this.getCommandForSortTabsByDomain(),
       this.getCommandForExtractTabs(),
+      this.getCommandForExtractTabsByTag(),
     ]
     return commands
   }
@@ -38,6 +39,14 @@ export default class GetCommandsService {
       action: Actions.EXTRACT_TABS,
       description: 'Extract tabs',
       hint: 'd1,d2,d3...',
+    }
+  }
+
+  private getCommandForExtractTabsByTag(): Command {
+    return {
+      action: Actions.EXTRACT_TABS_BY_TAG,
+      description: 'Extract tabs by tag',
+      hint: 'tag',
     }
   }
 }

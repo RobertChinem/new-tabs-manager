@@ -8,6 +8,7 @@ const Actions = {
   EXTRACT_TABS: 'extract_tabs',
   UPDATE_TAGS: 'update_tags',
   GET_TAGS: 'get_tags',
+  EXTRACT_TABS_BY_TAG: 'extract_tabs_by_tag',
 }
 
 export default Actions
