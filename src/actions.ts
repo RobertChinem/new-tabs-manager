@@ -9,6 +9,9 @@ const Actions = {
   UPDATE_TAGS: 'update_tags',
   GET_TAGS: 'get_tags',
   EXTRACT_TABS_BY_TAG: 'extract_tabs_by_tag',
+  OPEN_AND_EXTRACT_TABS_BY_TAG: 'open_and_extract_tabs_by_tag',
+  ADD_TAG_TO_CURRENT_TAB: 'add_tag_to_current_tab',
+  MERGE_ALL_TABS: 'merge_all_tabs',
 }
 
 export default Actions

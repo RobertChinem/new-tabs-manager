@@ -1,14 +1,17 @@
 import Actions from '../actions'
+import AddTagToCurrentTabController from '../controllers/messages-controller/add-tag-to-current-tab-controller'
 import ExtractTabsByTagController from '../controllers/messages-controller/extract-tabs-by-tag-controller'
 import ExtractTabsController from '../controllers/messages-controller/extract-tabs-controller'
 import GetCommandsController from '../controllers/messages-controller/get-commands-controller'
 import GetDomainRulesController from '../controllers/messages-controller/get-domain-rules-controller'
 import GetTagsController from '../controllers/messages-controller/get-tags-controller'
 import GroupTabsByDomainController from '../controllers/messages-controller/group-tabs-by-domain-controller'
+import MergeAllTabsController from '../controllers/messages-controller/merge-all-tabs-controller'
 import {
   Context,
   MessagesController,
 } from '../controllers/messages-controller/messages-controller'
+import OpenAndExtractTabsByTagController from '../controllers/messages-controller/open-and-extract-tabs-by-tag-controller'
 import SortByUrlServiceController from '../controllers/messages-controller/sort-by-url-service-controller'
 import UngroupTabsController from '../controllers/messages-controller/ungroup-tabs-controller'
 import UpdateDomainRulesController from '../controllers/messages-controller/update-domain-rules-controller'
@@ -50,6 +53,10 @@ export default class ChromeListenerForMessages {
       [Actions.GET_COMMANDS]: new GetCommandsController(),
       [Actions.UPDATE_TAGS]: new UpdateTagsController(),
       [Actions.GET_TAGS]: new GetTagsController(),
+      [Actions.OPEN_AND_EXTRACT_TABS_BY_TAG]:
+        new OpenAndExtractTabsByTagController(),
+      [Actions.ADD_TAG_TO_CURRENT_TAB]: new AddTagToCurrentTabController(),
+      [Actions.MERGE_ALL_TABS]: new MergeAllTabsController(),
     }
   }
 }

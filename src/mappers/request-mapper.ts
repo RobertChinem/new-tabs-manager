@@ -1,8 +1,10 @@
 import DomainRule from '../entities/domain-rule'
 import Request from '../entities/request'
 import Tag from '../entities/tag'
+import {AddTagToCurrentTabRequest} from '../services/add-tag-to-current-tab-service'
 import {ExtractTabsByTagRequest} from '../services/extract-tabs-by-tag-service'
 import {ExtractTabsRequest} from '../services/extract-tabs-service'
+import {OpenAndExtractTabsByTagRequest} from '../services/open-and-extract-tabs-by-tag-service'
 import {UpdateTagsRequest} from '../services/update-tags-service'
 
 export default class RequestMapper {
@@ -29,6 +31,22 @@ export default class RequestMapper {
   }
 
   toExtractTabsByTagRequest({data}: Request): ExtractTabsByTagRequest {
+    if (!data) throw new Error('Request data is empty')
+    return {
+      tagName: this.toString(data),
+    }
+  }
+
+  toOpenAndExtractTabsByTagRequest({
+    data,
+  }: Request): OpenAndExtractTabsByTagRequest {
+    if (!data) throw new Error('Request data is empty')
+    return {
+      tagName: this.toString(data),
+    }
+  }
+
+  toAddTagToCurrentTabRequest({data}: Request): AddTagToCurrentTabRequest {
     if (!data) throw new Error('Request data is empty')
     return {
       tagName: this.toString(data),

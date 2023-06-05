@@ -9,6 +9,9 @@ export default class GetCommandsService {
       this.getCommandForSortTabsByDomain(),
       this.getCommandForExtractTabs(),
       this.getCommandForExtractTabsByTag(),
+      this.getCommandForOpenAndExtractTabsByTag(),
+      this.getCommandForAddTagToCurrentTab(),
+      this.getCommandForMergeAllTabs(),
     ]
     return commands
   }
@@ -47,6 +50,29 @@ export default class GetCommandsService {
       action: Actions.EXTRACT_TABS_BY_TAG,
       description: 'Extract tabs by tag',
       hint: 'tag',
+    }
+  }
+
+  private getCommandForOpenAndExtractTabsByTag(): Command {
+    return {
+      action: Actions.OPEN_AND_EXTRACT_TABS_BY_TAG,
+      description: 'Open and extract tabs by tag',
+      hint: 'tag',
+    }
+  }
+
+  private getCommandForAddTagToCurrentTab(): Command {
+    return {
+      action: Actions.ADD_TAG_TO_CURRENT_TAB,
+      description: 'Add tag to current tab',
+      hint: 'tag',
+    }
+  }
+
+  private getCommandForMergeAllTabs(): Command {
+    return {
+      action: Actions.MERGE_ALL_TABS,
+      description: 'Merge all tabs',
     }
   }
 }
