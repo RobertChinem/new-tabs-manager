@@ -43,6 +43,7 @@ export default class ChromeListenerForMessages {
       [Actions.UNGROUP_TABS]: new UngroupTabsController(),
       [Actions.EXTRACT_TABS]: new ExtractTabsController(),
       [Actions.EXTRACT_TABS_BY_TAG]: new ExtractTabsByTagController(),
+      [Actions.MERGE_ALL_TABS]: new MergeAllTabsController(),
     }
   }
 
@@ -56,7 +57,6 @@ export default class ChromeListenerForMessages {
       [Actions.OPEN_AND_EXTRACT_TABS_BY_TAG]:
         new OpenAndExtractTabsByTagController(),
       [Actions.ADD_TAG_TO_CURRENT_TAB]: new AddTagToCurrentTabController(),
-      [Actions.MERGE_ALL_TABS]: new MergeAllTabsController(),
     }
   }
 }
