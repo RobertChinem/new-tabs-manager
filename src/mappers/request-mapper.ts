@@ -1,6 +1,7 @@
 import DomainRule from '../entities/domain-rule'
 import Request from '../entities/request'
 import Tag from '../entities/tag'
+import {ExtractTabsByTagRequest} from '../services/extract-tabs-by-tag-service'
 import {ExtractTabsRequest} from '../services/extract-tabs-service'
 import {UpdateTagsRequest} from '../services/update-tags-service'
 
@@ -24,6 +25,13 @@ export default class RequestMapper {
     if (!Array.isArray(data)) throw new Error('Request data is not an array')
     return {
       tags: data.map((item) => this.toTag(item)),
+    }
+  }
+
+  toExtractTabsByTagRequest({data}: Request): ExtractTabsByTagRequest {
+    if (!data) throw new Error('Request data is empty')
+    return {
+      tagName: this.toString(data),
     }
   }
 

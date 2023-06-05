@@ -1,4 +1,5 @@
 import Actions from '../actions'
+import ExtractTabsByTagController from '../controllers/messages-controller/extract-tabs-by-tag-controller'
 import ExtractTabsController from '../controllers/messages-controller/extract-tabs-controller'
 import GetCommandsController from '../controllers/messages-controller/get-commands-controller'
 import GetDomainRulesController from '../controllers/messages-controller/get-domain-rules-controller'
@@ -24,6 +25,7 @@ export default class ChromeListenerForMessages {
     [Actions.EXTRACT_TABS]: new ExtractTabsController(),
     [Actions.UPDATE_TAGS]: new UpdateTagsController(),
     [Actions.GET_TAGS]: new GetTagsController(),
+    [Actions.EXTRACT_TABS_BY_TAG]: new ExtractTabsByTagController(),
   }
 
   init() {
