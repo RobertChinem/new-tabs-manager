@@ -13,7 +13,7 @@ export default class Repository {
 
   async getDomainRules(): Promise<DomainRule[]> {
     const data = await chrome.storage.sync.get([this.DOMAIN_RULES_TABLE_NAME])
-    return data[this.DOMAIN_RULES_TABLE_NAME] as unknown as DomainRule[]
+    return (data[this.DOMAIN_RULES_TABLE_NAME] as unknown as DomainRule[]) || []
   }
 
   async updateTags(tags: Tag[]) {
@@ -24,6 +24,6 @@ export default class Repository {
 
   async getTags(): Promise<Tag[]> {
     const data = await chrome.storage.sync.get([this.TAGS_TABLE_NAME])
-    return data[this.TAGS_TABLE_NAME] as unknown as Tag[]
+    return (data[this.TAGS_TABLE_NAME] as unknown as Tag[]) || []
   }
 }
