@@ -1,6 +1,7 @@
 import Actions from '../actions'
 import Command from '../entities/command'
 import Repository from '../repositories/repository'
+import {getDomainFromURL} from '../utils/get-domain-from-url'
 
 export default class GetCommandsService {
   private repository = new Repository()
@@ -42,11 +43,14 @@ export default class GetCommandsService {
 
   private async getCommandForExtractTabs(): Promise<Command> {
     const domainRules = await this.repository.getDomainRules()
+    const tabs = await chrome.tabs.query({currentWindow: true})
+    const domains = tabs.map((tab) => getDomainFromURL(tab.url || ''))
     return {
       action: Actions.EXTRACT_TABS,
       description: 'Extract tabs',
       hint: 'd1,d2,d3...',
       datalist: [
+        ...domains,
         ...domainRules.map((domainRule) => domainRule.domain),
         ...domainRules.map((domainRule) => domainRule.title),
       ],
